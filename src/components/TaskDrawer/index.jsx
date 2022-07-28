@@ -34,7 +34,7 @@ export default function TaskDrawer({open, setOpen,
             </Typography>
             
             <List>
-                {folders.map((text, index) => (
+                {folders.map((text) => (
                 <ListItem key={text} disablePadding>
                     <ListItemButton align="justify" onClick={() => setSelectedFolder(text)}>
                         <ListItemText primary={text}/>

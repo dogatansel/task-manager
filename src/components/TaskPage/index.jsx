@@ -12,6 +12,10 @@ export default function TaskPage() {
     const [folders, setFolders] = useState(["To Do", "Done"]);
     const [folderInput, setFolderInput] = useState([""]);
     const [selectedFolder, setSelectedFolder] = useState("");
+    const [currentTask, setCurrentTask] = useState({taskName: "", 
+                                            projectName: "", assigneeName: "", 
+                                            deadline: {}, subtasks: [], isDone: false});
+    const [tasks, setTasks] = useState([])
 
     return (
         
@@ -21,6 +25,10 @@ export default function TaskPage() {
             <Navbar 
                 drawerWidth={drawerWidth}
                 folder={selectedFolder}
+                currentTask={currentTask}
+                setCurrentTask={setCurrentTask}
+                tasks={tasks}
+                setTasks={setTasks}
             />
             
             <TaskDrawer

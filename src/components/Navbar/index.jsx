@@ -3,13 +3,9 @@ import { useEffect, useState } from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import NewTaskDialogue from '../CreateDialog'
 
-function Navbar({drawerWidth, folder}) {
+function Navbar({drawerWidth, folder, currentTask, setCurrentTask, tasks, setTasks}) {
 
     const [open, setOpen] = useState(false);
-    const [currentTask, setCurrentTask] = useState({taskName: "", 
-                                            projectName: "", assigneeName: "", 
-                                            deadline: {}, subtasks: [], isDone: false});
-    const [tasks, setTasks] = useState({})
 
     const handleClickOpen = () => {
         setOpen(true);

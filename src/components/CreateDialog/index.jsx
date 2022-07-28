@@ -15,9 +15,11 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
     };
 
     const handleCreateTask = () => {
-        setTasks({...tasks, currentTask});
+        setTasks([...tasks, currentTask]);
         console.log(currentTask);
-        setCurrentTask("");
+        setCurrentTask({taskName: "", 
+            projectName: "", assigneeName: "", 
+            deadline: {}, subtasks: [], isDone: false});
         handleClose();
     };  
 
