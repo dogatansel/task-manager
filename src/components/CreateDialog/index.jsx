@@ -26,7 +26,7 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
     };
 
     const handleSaveSubtask = () => {
-        setCurrentTask({...currentTask, subtasks: {...currentTask.subtasks, subtask}});
+        setCurrentTask({...currentTask, subtasks: [...currentTask.subtasks, subtask]});
         console.log(currentTask.subtasks)
         setSubtask({title: "", subtaskDone: false});
     };
@@ -52,7 +52,7 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
                     autoFocus
                     margin="dense"
                     id="task-name"
-                    value={currentTask.taskName}
+                    value={currentTask.taskName || ""}
                     onChange={(e) => setCurrentTask({...currentTask, taskName: e.target.value})}
                     label="Task Name"
                     type="task name"
@@ -63,7 +63,7 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
                     autoFocus
                     margin="dense"
                     id="project-name"
-                    value={currentTask.projectName}
+                    value={currentTask.projectName || ""}
                     onChange={(e) => setCurrentTask({...currentTask, projectName: e.target.value})}
                     label="Project Name"
                     type="project name"
@@ -74,7 +74,7 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
                     autoFocus
                     margin="dense"
                     id="assignee-name"
-                    value={currentTask.assigneeName}
+                    value={currentTask.assigneeName || ""}
                     onChange={(e) => setCurrentTask({...currentTask, assigneeName: e.target.value})}
                     label="Assignee"
                     type="assignee name"
@@ -87,7 +87,7 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
                         autoFocus
                         margin="dense"
                         id="subtask-name"
-                        value={subtask.title}
+                        value={subtask.title || ""}
                         onChange={(e) => setSubtask({...subtask, title: e.target.value})}
                         label="Subtask Name"
                         type="subtask name"

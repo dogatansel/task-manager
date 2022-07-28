@@ -8,7 +8,7 @@ function Navbar({drawerWidth, folder}) {
     const [open, setOpen] = useState(false);
     const [currentTask, setCurrentTask] = useState({taskName: "", 
                                             projectName: "", assigneeName: "", 
-                                            deadline: {}, subtasks: {}, isDone: false});
+                                            deadline: {}, subtasks: [], isDone: false});
     const [tasks, setTasks] = useState({})
 
     const handleClickOpen = () => {
