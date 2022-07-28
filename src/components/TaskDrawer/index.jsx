@@ -34,12 +34,12 @@ export default function TaskDrawer({open, setOpen,
             </Typography>
             
             <List>
-                {folders.map((text) => (
-                <ListItem key={text} disablePadding>
-                    <ListItemButton align="justify" onClick={() => setSelectedFolder(text)}>
-                        <ListItemText primary={text}/>
+                {folders.map(({folderName, tasks}) => (
+                <ListItem key={folderName} disablePadding>
+                    <ListItemButton align="justify" onClick={() => setSelectedFolder({folderName, tasks})}>
+                        <ListItemText primary={folderName}/>
                     </ListItemButton>
-                    <Button onClick={(e) => this.deleteRow(text, e)}>Delete</Button>
+                    <Button disabled>Delete</Button>
                 </ListItem>
                 ))}
             </List>

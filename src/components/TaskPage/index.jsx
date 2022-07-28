@@ -9,14 +9,14 @@ const drawerWidth = 240;
 
 export default function TaskPage() {
     const [open, setOpen] = useState(false);
-    const [folders, setFolders] = useState(["To Do", "Done"]);
-    const [folderInput, setFolderInput] = useState([""]);
-    const [selectedFolder, setSelectedFolder] = useState("");
+    const [folders, setFolders] = useState([{folderName: "To Do", tasks: []},{folderName: "Done", tasks: []}]);
+    const [folderInput, setFolderInput] = useState("");
+    const [selectedFolder, setSelectedFolder] = useState({folderName: "", tasks: []});
     const [currentTask, setCurrentTask] = useState({taskName: "", 
                                             projectName: "", assigneeName: "", 
                                             deadline: {}, subtasks: [], isDone: false});
-    const [tasks, setTasks] = useState([])
-
+    const [tasks, setTasks] = useState([]);
+    
     return (
         
         <Box sx={{ display: 'flex' }}>

@@ -9,7 +9,7 @@ export default function NewFolderDialog({open, setOpen, folderInput, setFolderIn
     };
     
     const handleFolderAddition = () => {
-        setFolders([...folders, folderInput]);
+        setFolders([...folders, {folderName: folderInput, tasks: []}]);
         console.log(folders);
         setFolderInput("");
         handleClose();

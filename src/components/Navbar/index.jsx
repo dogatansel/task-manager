@@ -22,8 +22,9 @@ function Navbar({drawerWidth, folder, currentTask, setCurrentTask, tasks, setTas
             color="default"
         >
             <Toolbar>
+                
                 <Typography variant="h5" noWrap component="div">
-                    {folder}
+                    {folder.folderName}
                 </Typography>
                 
                 <Button 
