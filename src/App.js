@@ -1,12 +1,12 @@
 import React from 'react';
-import TaskDrawer from './components/TaskDrawer';
+import TaskPage from './components/TaskPage';
 import './App.css';
 
 function App() {
 
   return (
     <div className="App">
-      <TaskDrawer/>
+      <TaskPage/>
     </div>
   );
 }
