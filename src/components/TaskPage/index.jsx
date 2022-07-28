@@ -16,7 +16,7 @@ export default function TaskPage() {
                                             projectName: "", assigneeName: "", 
                                             deadline: {}, subtasks: [], isDone: false});
     const [tasks, setTasks] = useState([]);
-    
+
     return (
         
         <Box sx={{ display: 'flex' }}>
@@ -43,7 +43,12 @@ export default function TaskPage() {
                 setSelectedFolder={setSelectedFolder} 
             />
 
-            <TaskBoard/>
+            <TaskBoard
+                tasks={tasks}
+                setTasks={setTasks}
+                currentTask={currentTask}
+                setCurrentTask={setCurrentTask}
+            />
         </Box>
     );
 }
