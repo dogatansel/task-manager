@@ -4,9 +4,12 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, T
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Box } from '@mui/system';
 
-export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentTask, tasks, setTasks}) {
+export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentTask, tasks, 
+    setTasks, folder,
+    setSelectedFolder,
+    folders,
+    setFolders}) {
 
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
 
@@ -16,8 +19,14 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
 
     const handleCreateTask = () => {
         setTasks([...tasks, currentTask]);
-        console.log(currentTask);
-        setCurrentTask({taskName: "", 
+        setSelectedFolder({...folder, folderTasks: tasks});
+        //setFolders([...folders, {folderName: folder.folderName, folderTasks: tasks}]);
+        console.log("(task dialog) current task: ", currentTask);
+        console.log("(task dialog) folder: ", folder);
+        console.log(folders);
+        //console.log("OĞLUM BURA ÇALIŞIYOR MU LAN");
+
+        setCurrentTask("Current task: ", {taskName: "", 
             projectName: "", assigneeName: "", 
             deadline: {}, subtasks: [], isDone: false});
         handleClose();
@@ -84,29 +93,30 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
                     variant="standard"
                 />
                 
-                <Box>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="subtask-name"
-                        value={subtask.title || ""}
-                        onChange={(e) => setSubtask({...subtask, title: e.target.value})}
-                        label="Subtask Name"
-                        type="subtask name"
-                        variant="standard"
-                    />
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="subtask-name"
+                    value={subtask.title || ""}
+                    onChange={(e) => setSubtask({...subtask, title: e.target.value})}
+                    label="Subtask Name"
+                    type="subtask name"
+                    variant="standard"
+                />
 
-                    {subtask.subtaskDone === false 
-                    ? <Button onClick={handleSubtaskFinished}>Finished?</Button>
-                    : <Button onClick={handleSubtaskFinished} disabled color="success">Task Is Done</Button>}
-                    <Button onClick={handleSaveSubtask}>Save</Button>
+                {subtask.subtaskDone === false 
+                ? <Button onClick={handleSubtaskFinished}>Finished?</Button>
+                : <Button onClick={handleSubtaskFinished} disabled color="success">Task Is Done</Button>}
+                <Button onClick={handleSaveSubtask}>Save</Button>
 
-                    <DialogContentText>
-                        {/*currentTask.subtasks*/}
-                    </DialogContentText>
-
-                </Box>
-
+                
+                {(currentTask.subtasks) && (currentTask.subtasks).map((subtaskOnDialog) => { 
+                    return(
+                        <DialogContentText key={subtaskOnDialog.title}>
+                                {subtaskOnDialog.title} - Subtask is {subtaskOnDialog.subtaskDone ? 'done' : 'not done'}  
+                        </DialogContentText>);
+                    })}
+                
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
                         label="Task Deadline"

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
-import NewTaskDialogue from '../CreateDialog'
+import NewTaskDialogue from '../CreateDialog';
 
-function Navbar({drawerWidth, folder, currentTask, setCurrentTask, tasks, setTasks}) {
+function Navbar({drawerWidth, folder, setSelectedFolder, currentTask, setCurrentTask, tasks, setTasks, folders, setFolders}) {
 
     const [open, setOpen] = useState(false);
 
@@ -12,7 +12,7 @@ function Navbar({drawerWidth, folder, currentTask, setCurrentTask, tasks, setTas
     };
     
     useEffect(() => {
-        console.log("tasks", tasks)
+        console.log("Tasks (Navbar): ", tasks)
     }, [tasks])
 
     return(
@@ -23,16 +23,25 @@ function Navbar({drawerWidth, folder, currentTask, setCurrentTask, tasks, setTas
         >
             <Toolbar>
                 
-                <Typography variant="h5" noWrap component="div">
+                <Typography variant="h5" noWrap component="div" paddingRight="20px">
                     {folder.folderName}
                 </Typography>
                 
+                {folder.folderName? 
                 <Button 
                     display="inline-flex" 
                     variant="contained"
                     onClick={handleClickOpen}>
                         New Task
                 </Button>
+                :
+                <Button 
+                    display="inline-flex" 
+                    variant="contained"
+                    disabled
+                    onClick={handleClickOpen}>
+                        New Task
+                </Button>}
                 
                 <NewTaskDialogue 
                     open={open} 
@@ -41,6 +50,10 @@ function Navbar({drawerWidth, folder, currentTask, setCurrentTask, tasks, setTas
                     setCurrentTask={setCurrentTask} 
                     tasks={tasks}
                     setTasks={setTasks}
+                    folder={folder}
+                    setSelectedFolder={setSelectedFolder}
+                    folders={folders}
+                    setFolders={setFolders}
                 />
 
             </Toolbar>

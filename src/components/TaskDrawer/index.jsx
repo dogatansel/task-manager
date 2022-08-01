@@ -34,9 +34,9 @@ export default function TaskDrawer({open, setOpen,
             </Typography>
             
             <List>
-                {folders.map(({folderName, tasks}) => (
+                {folders.map(({folderName, folderTasks}) => (
                 <ListItem key={folderName} disablePadding>
-                    <ListItemButton align="justify" onClick={() => setSelectedFolder({folderName, tasks})}>
+                    <ListItemButton align="justify" onClick={() => setSelectedFolder({folderName, folderTasks})}>
                         <ListItemText primary={folderName}/>
                     </ListItemButton>
                     <Button disabled>Delete</Button>
