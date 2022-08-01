@@ -55,6 +55,8 @@ export default function TaskPage() {
                     setTasks={setTasks}
                     currentTask={currentTask}
                     setCurrentTask={setCurrentTask}
+                    selectedFolder={selectedFolder} 
+                    setSelectedFolder={setSelectedFolder}
                 />
 
             </TasksContext.Provider>

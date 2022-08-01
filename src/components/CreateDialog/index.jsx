@@ -42,10 +42,11 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
         setSubtask({title: "", subtaskDone: false});
     };
 
+    /*
     const handleIsDone = () => {
         setCurrentTask({...currentTask, isDone: !(currentTask.isDone)});
     }; 
-
+    */
     useEffect(() => {
         console.log("subtasks", currentTask.subtasks)
     }, [currentTask.subtasks])
@@ -126,9 +127,9 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
                     />
                 </LocalizationProvider>
                 
-                {currentTask.isDone === false 
+                {/*currentTask.isDone === false 
                     ? <Button onClick={handleIsDone}>Finished?</Button>
-                    : <Button onClick={handleIsDone} color="success">Task Is Done</Button>}
+                : <Button onClick={handleIsDone} color="success">Task Is Done</Button>*/}
 
             </DialogContent>
 
