@@ -46,10 +46,6 @@ function Navbar({drawerWidth, folder, setSelectedFolder, currentTask, setCurrent
                 <NewTaskDialogue 
                     open={open} 
                     setOpen={setOpen}
-                    currentTask={currentTask}
-                    setCurrentTask={setCurrentTask} 
-                    tasks={tasks}
-                    setTasks={setTasks}
                     folder={folder}
                     setSelectedFolder={setSelectedFolder}
                     folders={folders}

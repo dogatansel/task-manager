@@ -2,7 +2,8 @@ import React from 'react';
 import { Box } from '@mui/material';
 import TaskCard from '../TaskCard';
 
-export default function TaskBoard(tasks, setTasks, currentTask, setCurrentTask, selectedFolder, setSelectedFolder){
+
+export default function TaskBoard(selectedFolder, setSelectedFolder){
 
     return (
         <Box
@@ -10,9 +11,6 @@ export default function TaskBoard(tasks, setTasks, currentTask, setCurrentTask, 
             sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
             <TaskCard
-                tasks={tasks}
-                currentTask={currentTask} 
-                setCurrentTask={setCurrentTask} 
                 selectedFolder={selectedFolder} 
                 setSelectedFolder={setSelectedFolder}
             />

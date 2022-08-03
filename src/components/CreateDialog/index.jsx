@@ -6,13 +6,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TasksContext } from '../TaskPage';
 
-export default function NewTaskDialogue({open, setOpen, /* currentTask, setCurrentTask, tasks, 
-    setTasks,*/ folder,
+export default function NewTaskDialogue({open, setOpen, folder,
     setSelectedFolder,
     folders,
     setFolders}) {
 
-    //const tasks = useContext(TasksContext);
     const { tasks, setTasks, currentTask, setCurrentTask } = useContext(TasksContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
 
@@ -45,7 +43,6 @@ export default function NewTaskDialogue({open, setOpen, /* currentTask, setCurre
 
     const handleSaveSubtask = () => {
         setCurrentTask({...currentTask, subtasks: [...currentTask.subtasks, subtask]});
-        //console.log(currentTask.subtasks)
         setSubtask({title: "", subtaskDone: false});
     };
 

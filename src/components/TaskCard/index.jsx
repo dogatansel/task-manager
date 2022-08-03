@@ -5,7 +5,7 @@ import { ListItem, ListItemText, ListItemButton, List  } from '@mui/material';
 import { TasksContext } from '../TaskPage';
 
 
-export default function TaskCard(/*tasks, currentTask, setCurrentTask,*/ selectedFolder, setSelectedFolder){
+export default function TaskCard(selectedFolder, setSelectedFolder){
 
     const {tasks, setTasks, currentTask, setCurrentTask} = useContext(TasksContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
@@ -42,13 +42,18 @@ export default function TaskCard(/*tasks, currentTask, setCurrentTask,*/ selecte
             }
         ));
 
+        setCurrentTask({taskName: "", 
+            projectName: "", assigneeName: "", 
+            deadline: {}, subtasks: [], isDone: false});
         
     };
 
     useEffect(() => {
+        /*
         console.log("subtask (taskcard): ", subtask);
         console.log("current task (taskcard): ", currentTask);
         console.log("tasks (taskcard): ", tasks);
+        */
     }, [subtask, currentTask, tasks])
 
     return (

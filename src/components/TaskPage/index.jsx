@@ -6,7 +6,6 @@ import { useState, createContext } from 'react';
 import { Box, CssBaseline } from '@mui/material';
 
 const drawerWidth = 240;
-const CurrentTaskContext = createContext();
 export const TasksContext = createContext();
 
 export default function TaskPage() {
@@ -25,7 +24,7 @@ export default function TaskPage() {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
 
-            <TasksContext.Provider value={{tasks, setTasks, currentTask, setCurrentTask}}>
+            <TasksContext.Provider value={{tasks: selectedFolder.folderTasks, setTasks, currentTask, setCurrentTask}}>
                 <Navbar 
                     drawerWidth={drawerWidth}
                     folder={selectedFolder}
@@ -51,10 +50,6 @@ export default function TaskPage() {
                 />
             
                 <TaskBoard
-                    tasks={tasks}
-                    setTasks={setTasks}
-                    currentTask={currentTask}
-                    setCurrentTask={setCurrentTask}
                     selectedFolder={selectedFolder} 
                     setSelectedFolder={setSelectedFolder}
                 />
