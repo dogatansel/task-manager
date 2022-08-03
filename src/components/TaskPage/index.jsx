@@ -25,7 +25,7 @@ export default function TaskPage() {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
 
-            <TasksContext.Provider value={{tasks, setTasks}}>
+            <TasksContext.Provider value={{tasks, setTasks, currentTask, setCurrentTask}}>
                 <Navbar 
                     drawerWidth={drawerWidth}
                     folder={selectedFolder}
