@@ -26,7 +26,7 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
         console.log(folders);
         //console.log("OĞLUM BURA ÇALIŞIYOR MU LAN");
 
-        setCurrentTask("Current task: ", {taskName: "", 
+        setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
             deadline: {}, subtasks: [], isDone: false});
         handleClose();
