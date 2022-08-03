@@ -7,7 +7,7 @@ import { Box, CssBaseline } from '@mui/material';
 
 const drawerWidth = 240;
 const CurrentTaskContext = createContext();
-export const TasksContext = createContext([]);
+export const TasksContext = createContext();
 
 export default function TaskPage() {
     const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ export default function TaskPage() {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
 
-            <TasksContext.Provider value={tasks}>
+            <TasksContext.Provider value={{tasks, setTasks}}>
                 <Navbar 
                     drawerWidth={drawerWidth}
                     folder={selectedFolder}

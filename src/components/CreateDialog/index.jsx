@@ -1,16 +1,19 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Button} from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TasksContext } from '../TaskPage';
 
-export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentTask, tasks, 
-    setTasks, folder,
+export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentTask, /*tasks, 
+    setTasks,*/ folder,
     setSelectedFolder,
     folders,
     setFolders}) {
 
+    //const tasks = useContext(TasksContext);
+    const { tasks, setTasks } = useContext(TasksContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
 
     const handleClose = () => {
@@ -19,12 +22,16 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
 
     const handleCreateTask = () => {
         setTasks([...tasks, currentTask]);
-        setSelectedFolder({...folder, folderTasks: tasks});
-        //setFolders([...folders, {folderName: folder.folderName, folderTasks: tasks}]);
-        console.log("(task dialog) current task: ", currentTask);
-        console.log("(task dialog) folder: ", folder);
-        console.log(folders);
-        //console.log("OĞLUM BURA ÇALIŞIYOR MU LAN");
+    
+        setSelectedFolder({...folder, folderTasks:[...folder.folderTasks, currentTask]});
+        setFolders(current => 
+            current.map(aFolder => {
+                if (aFolder.folderName === folder.folderName) 
+                    return {...aFolder, folderTasks: [...folder.folderTasks, currentTask]};
+                else 
+                    return {...aFolder};
+            }
+        ));
 
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
@@ -38,7 +45,7 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
 
     const handleSaveSubtask = () => {
         setCurrentTask({...currentTask, subtasks: [...currentTask.subtasks, subtask]});
-        console.log(currentTask.subtasks)
+        //console.log(currentTask.subtasks)
         setSubtask({title: "", subtaskDone: false});
     };
 
@@ -48,8 +55,14 @@ export default function NewTaskDialogue({open, setOpen, currentTask, setCurrentT
     }; 
     */
     useEffect(() => {
+        /*
         console.log("subtasks", currentTask.subtasks)
-    }, [currentTask.subtasks])
+        console.log("(task dialog) current task: ", currentTask);
+        console.log("(task dialog) tasks: ", tasks);
+        console.log("(task dialog) folder: ", folder);
+        console.log(folders);
+        */
+    }, [currentTask.subtasks, tasks, folder, folders] )
     
     return (
         <Dialog open={open} onClose={handleClose}>

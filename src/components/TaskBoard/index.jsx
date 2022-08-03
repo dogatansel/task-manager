@@ -1,10 +1,6 @@
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
-import { Typography, Box, Card, CardHeader, CardMedia, CardContent, CardActions, Button, Divider } from '@mui/material';
-import { ListItem, ListItemText, ListItemButton, List  } from '@mui/material';
-import { TasksContext } from '../TaskPage';
+import { Box } from '@mui/material';
 import TaskCard from '../TaskCard';
-
 
 export default function TaskBoard(tasks, setTasks, currentTask, setCurrentTask, selectedFolder, setSelectedFolder){
 

@@ -7,15 +7,15 @@ import { TasksContext } from '../TaskPage';
 
 export default function TaskCard(/*tasks,*/ currentTask, setCurrentTask, selectedFolder, setSelectedFolder){
 
-    const tasks = useContext(TasksContext);
+    const {tasks, setTasks} = useContext(TasksContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
-    console.log("TaskCard tasks: ", tasks);
+    //console.log("TaskCard tasks: ", tasks);
     //console.log("Taskboard current task: ", tasks[0]);
     //console.log("Taskboard current task: ", currentTask);
     //console.log("Taskboard current task name: ", currentTask.taskName);
 
     const handleIsDone = (aTask) => {
-        console.log("Taskboard current task: ", aTask);
+        //console.log("Taskboard current task: ", aTask);
         //setCurrentTask(aTask);
         //console.log("Taskboard current task: ", currentTask);
         //setCurrentTask({...currentTask, isDone: !(currentTask.isDone)});
@@ -23,7 +23,7 @@ export default function TaskCard(/*tasks,*/ currentTask, setCurrentTask, selecte
 
     const handleSubtaskDone = (aTitle, index) => {
         setSubtask({title: aTitle, subtaskDone: true});
-        console.log("subtask (taskcard): ", subtask);
+        //console.log("subtask (taskcard): ", subtask);
         //setCurrentTask({...currentTask, subtasks: [...currentTask.subtasks, subtask]});
     };
 
