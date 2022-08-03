@@ -16,6 +16,9 @@ export default function NewTaskDialogue({open, setOpen, folder,
 
     const handleClose = () => {
         setOpen(false);
+        setCurrentTask({taskName: "", 
+            projectName: "", assigneeName: "", 
+            deadline: {}, subtasks: [], isDone: false});
     };
 
     const handleCreateTask = () => {
@@ -31,9 +34,6 @@ export default function NewTaskDialogue({open, setOpen, folder,
             }
         ));
 
-        setCurrentTask({taskName: "", 
-            projectName: "", assigneeName: "", 
-            deadline: {}, subtasks: [], isDone: false});
         handleClose();
     };  
 

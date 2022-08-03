@@ -11,36 +11,18 @@ export default function TaskCard(selectedFolder, setSelectedFolder){
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
 
     const handleIsDone = (aTask) => {
-        //console.log("Taskboard current task: ", aTask);
-        //setCurrentTask(aTask);
-        //console.log("Taskboard current task: ", currentTask);
-        //setCurrentTask({...currentTask, isDone: !(currentTask.isDone)});
+        setCurrentTask({...aTask, isDone: !aTask.isDone});
     }; 
 
     const handleSubtaskDone = (aTask, aTitle) => {
         setSubtask({title: aTitle, subtaskDone: true});
-        setCurrentTask({...aTask, 
-            subtasks: aTask.subtasks.map(aSubtask => {
-                if (aSubtask.title === aTitle) 
-                    return {...aSubtask, subtaskDone: true};
-                else 
-                    return {...aSubtask};
-            }
-        )});
-        
-        setTasks(current => 
-            current.map(someTask => {
-                if (someTask.taskName === aTask.taskName) 
-                    return {...someTask, subtasks: aTask.subtasks.map(aSubtask => {
-                        if (aSubtask.title === aTitle) 
-                            return {...aSubtask, subtaskDone: true};
-                        else 
-                            return {...aSubtask};
-                    })};
-                else 
-                    return {...someTask};
-            }
-        ));
+
+        const _tasks = [...tasks];
+        const currentTaskIndex = _tasks.findIndex((curr) => aTask.taskName === curr.taskName)
+        const subTaskIndex = _tasks[currentTaskIndex].subtasks.findIndex((curr) => curr.title === aTitle)
+
+        _tasks[currentTaskIndex].subtasks[subTaskIndex].subtaskDone = true
+        setTasks([..._tasks])
 
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
@@ -49,18 +31,18 @@ export default function TaskCard(selectedFolder, setSelectedFolder){
     };
 
     useEffect(() => {
-        /*
+        
         console.log("subtask (taskcard): ", subtask);
         console.log("current task (taskcard): ", currentTask);
         console.log("tasks (taskcard): ", tasks);
-        */
+        
     }, [subtask, currentTask, tasks])
 
     return (
        
         <Box>
             {tasks.map((aTask) => { return(
-                <Card key={aTask.taskName} sx={{ maxWidth: 345 }}>
+                <Card key={aTask.taskName} sx={{display: 'block', maxWidth: 345 }}>
                     <CardHeader
                         title={aTask.taskName}
                         subheader={aTask.projectName}
@@ -102,9 +84,15 @@ export default function TaskCard(selectedFolder, setSelectedFolder){
                             Task Deadline: {aTask.deadline.toDateString()}
                         </Typography>
 
-                        <Button onClick={handleIsDone(aTask)}>
+                        {!aTask.isDone? 
+                        <Button onClick={() => handleIsDone(aTask)}>
                             Finish Task
                         </Button>
+                        :
+                        <Typography variant="subtitle2" color="text.secondary">
+                            Task Finished
+                        </Typography>
+                        }
                     </CardContent>
                 </Card>);
             })}

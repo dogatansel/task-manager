@@ -29,10 +29,6 @@ export default function TaskPage() {
                     drawerWidth={drawerWidth}
                     folder={selectedFolder}
                     setSelectedFolder={setSelectedFolder}
-                    currentTask={currentTask}
-                    setCurrentTask={setCurrentTask}
-                    tasks={tasks}
-                    setTasks={setTasks}
                     folders={folders}
                     setFolders={setFolders}
                 />

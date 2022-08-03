@@ -12,7 +12,7 @@ function Navbar({drawerWidth, folder, setSelectedFolder, currentTask, setCurrent
     };
     
     useEffect(() => {
-        console.log("Tasks (Navbar): ", tasks)
+        console.log("Tasks (Navbar): ", tasks);
     }, [tasks])
 
     return(
@@ -27,7 +27,7 @@ function Navbar({drawerWidth, folder, setSelectedFolder, currentTask, setCurrent
                     {folder.folderName}
                 </Typography>
                 
-                {folder.folderName? 
+                {folder.folderName === 'To Do'? 
                 <Button 
                     display="inline-flex" 
                     variant="contained"
