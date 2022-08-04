@@ -21,6 +21,7 @@ export default function TaskCard(){
         const doneTasksIndex = _folders[doneFolderIndex].folderTasks.length;
 
         _folders[doneFolderIndex].folderTasks[doneTasksIndex] = aTask;
+        _folders[doneFolderIndex].folderTasks[doneTasksIndex].isDone = true;
         _folders[toDoFolderIndex].folderTasks.splice(currentTaskIndex, 1);
     }; 
 
