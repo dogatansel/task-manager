@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Button} from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Button, Typography } from '@mui/material';
+import { Box, Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -37,20 +38,18 @@ export default function NewTaskDialogue({open, setOpen, folder,
         handleClose();
     };  
 
-    const handleSubtaskFinished = () => {
-        setSubtask({...subtask, subtaskDone: !(subtask.subtaskDone)});
+    const handleSubtaskStatus = (aSubtask, status, index) => {
+
+        const _subtasks = [...currentTask.subtasks];
+        _subtasks[index] = {...aSubtask, subtaskDone: status};
+        setCurrentTask({...currentTask, subtasks: _subtasks});
     };
 
-    const handleSaveSubtask = () => {
+    const handleAddSubtask = () => {
         setCurrentTask({...currentTask, subtasks: [...currentTask.subtasks, subtask]});
         setSubtask({title: "", subtaskDone: false});
     };
 
-    /*
-    const handleIsDone = () => {
-        setCurrentTask({...currentTask, isDone: !(currentTask.isDone)});
-    }; 
-    */
     useEffect(() => {
         /*
         console.log("subtasks", currentTask.subtasks)
@@ -65,21 +64,21 @@ export default function NewTaskDialogue({open, setOpen, folder,
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Create New Task</DialogTitle>
 
-            <DialogContent>
+            <DialogContent component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
                 <DialogContentText>
                     To create a new task, please fill in the information below and click create.
                 </DialogContentText>
 
                 <TextField
                     autoFocus
+                    required
                     margin="dense"
                     id="task-name"
                     value={currentTask.taskName || ""}
                     onChange={(e) => setCurrentTask({...currentTask, taskName: e.target.value})}
                     label="Task Name"
                     type="task name"
-                    fullWidth
-                    variant="standard"
+                    variant="outlined"
                 />
                 <TextField
                     autoFocus
@@ -89,45 +88,20 @@ export default function NewTaskDialogue({open, setOpen, folder,
                     onChange={(e) => setCurrentTask({...currentTask, projectName: e.target.value})}
                     label="Project Name"
                     type="project name"
-                    fullWidth
-                    variant="standard"
+                    variant="outlined"
                 />
                 <TextField
                     autoFocus
+                    required
                     margin="dense"
                     id="assignee-name"
                     value={currentTask.assigneeName || ""}
                     onChange={(e) => setCurrentTask({...currentTask, assigneeName: e.target.value})}
                     label="Assignee"
                     type="assignee name"
-                    fullWidth
-                    variant="standard"
-                />
-                
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="subtask-name"
-                    value={subtask.title || ""}
-                    onChange={(e) => setSubtask({...subtask, title: e.target.value})}
-                    label="Subtask Name"
-                    type="subtask name"
-                    variant="standard"
+                    variant="outlined"
                 />
 
-                {subtask.subtaskDone === false 
-                ? <Button onClick={handleSubtaskFinished}>Finished?</Button>
-                : <Button onClick={handleSubtaskFinished} disabled color="success">Task Is Done</Button>}
-                <Button onClick={handleSaveSubtask}>Save</Button>
-
-                
-                {(currentTask.subtasks) && (currentTask.subtasks).map((subtaskOnDialog) => { 
-                    return(
-                        <DialogContentText key={subtaskOnDialog.title}>
-                                {subtaskOnDialog.title} - Subtask is {subtaskOnDialog.subtaskDone ? 'done' : 'not done'}  
-                        </DialogContentText>);
-                    })}
-                
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
                         label="Task Deadline"
@@ -137,9 +111,47 @@ export default function NewTaskDialogue({open, setOpen, folder,
                     />
                 </LocalizationProvider>
                 
-                {/*currentTask.isDone === false 
-                    ? <Button onClick={handleIsDone}>Finished?</Button>
-                : <Button onClick={handleIsDone} color="success">Task Is Done</Button>*/}
+                <Box > 
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="subtask-name"
+                        value={subtask.title || ""}
+                        onChange={(e) => setSubtask({...subtask, title: e.target.value})}
+                        label="Subtask Name"
+                        type="subtask name"
+                        variant="outlined"
+                    />
+                    <Button onClick={handleAddSubtask}>Add</Button>
+
+                    <Typography sx={{ display: 'flex' }}>
+                        Subtasks, Status
+                    </Typography>
+                
+                    {(currentTask.subtasks) && (currentTask.subtasks).map((subtaskOnDialog, index) => { 
+                        return(
+                            <FormControl sx={{ display: 'inlined' }} key={subtaskOnDialog.title}>
+
+                                <DialogContentText>
+                                    {subtaskOnDialog.title}  
+                                </DialogContentText>
+
+                                <RadioGroup row>
+                                    <FormControlLabel value="done" control={
+                                        <Radio onClick={() => handleSubtaskStatus(subtaskOnDialog, true, index)}/>
+                                    } label="Done" />
+
+                                    <FormControlLabel value="not done" control={
+                                        <Radio onClick={() => handleSubtaskStatus(subtaskOnDialog, false, index)}/>
+                                    } label="Not Done" />
+                                </RadioGroup>
+
+                            </FormControl>
+                        
+                        );                       
+                    })}
+                </Box>
 
             </DialogContent>
 

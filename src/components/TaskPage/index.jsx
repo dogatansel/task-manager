@@ -19,7 +19,6 @@ export default function TaskPage() {
                                             deadline: {}, subtasks: [], isDone: false});
     const [tasks, setTasks] = useState([]);
 
-
     return (
         
         <Box sx={{ display: 'flex' }}>
