@@ -3,17 +3,14 @@ import { Box } from '@mui/material';
 import TaskCard from '../TaskCard';
 
 
-export default function TaskBoard(selectedFolder, setSelectedFolder){
+export default function TaskBoard(){
 
     return (
         <Box
             component="main"
             sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
-            <TaskCard
-                selectedFolder={selectedFolder} 
-                setSelectedFolder={setSelectedFolder}
-            />
+            <TaskCard />
         </Box>
     );
 

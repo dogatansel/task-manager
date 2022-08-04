@@ -3,15 +3,25 @@ import { useState, useContext, useEffect } from 'react';
 import { Typography, Box, Card, CardHeader, CardContent, Button, Divider } from '@mui/material';
 import { ListItem, ListItemText, ListItemButton, List  } from '@mui/material';
 import { TasksContext } from '../TaskPage';
+import { FolderContext } from '../TaskPage';
 
-
-export default function TaskCard(selectedFolder, setSelectedFolder){
+export default function TaskCard(){
 
     const {tasks, setTasks, currentTask, setCurrentTask} = useContext(TasksContext);
+    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
 
     const handleIsDone = (aTask) => {
         setCurrentTask({...aTask, isDone: !aTask.isDone});
+
+        const _folders = [...folders];
+        const toDoFolderIndex = _folders.findIndex((curr) => curr.folderName === 'To Do')
+        const doneFolderIndex = _folders.findIndex((curr) => curr.folderName === 'Done')
+        const currentTaskIndex = _folders[toDoFolderIndex].folderTasks.findIndex((curr) => curr.taskName === aTask.taskName)
+        const doneTasksIndex = _folders[doneFolderIndex].folderTasks.length;
+
+        _folders[doneFolderIndex].folderTasks[doneTasksIndex] = aTask;
+        _folders[toDoFolderIndex].folderTasks.splice(currentTaskIndex, 1);
     }; 
 
     const handleSubtaskDone = (aTask, aTitle) => {
@@ -31,11 +41,11 @@ export default function TaskCard(selectedFolder, setSelectedFolder){
     };
 
     useEffect(() => {
-        
+        /*
         console.log("subtask (taskcard): ", subtask);
         console.log("current task (taskcard): ", currentTask);
         console.log("tasks (taskcard): ", tasks);
-        
+        */
     }, [subtask, currentTask, tasks])
 
     return (

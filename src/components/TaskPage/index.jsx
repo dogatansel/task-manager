@@ -7,6 +7,7 @@ import { Box, CssBaseline } from '@mui/material';
 
 const drawerWidth = 240;
 export const TasksContext = createContext();
+export const FolderContext = createContext();
 
 export default function TaskPage() {
     const [open, setOpen] = useState(false);
@@ -44,11 +45,11 @@ export default function TaskPage() {
                     selectedFolder={selectedFolder} 
                     setSelectedFolder={setSelectedFolder} 
                 />
-            
-                <TaskBoard
-                    selectedFolder={selectedFolder} 
-                    setSelectedFolder={setSelectedFolder}
-                />
+
+                <FolderContext.Provider value={{selectedFolder, setSelectedFolder, folders, setFolders}}>
+                    <TaskBoard/>
+                </FolderContext.Provider>
+                
 
             </TasksContext.Provider>
             
