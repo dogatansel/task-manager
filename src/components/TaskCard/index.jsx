@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import { Typography, Box, Card, CardHeader, CardContent, Button, Divider } from '@mui/material';
 import { ListItem, ListItemText, List  } from '@mui/material';
-import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import { Radio, RadioGroup, FormControl, FormControlLabel, InputLabel, Select, MenuItem } from '@mui/material';
 import { TasksContext } from '../TaskPage';
 import { FolderContext } from '../TaskPage';
 
@@ -11,6 +11,7 @@ export default function TaskCard(){
     const {tasks, setTasks, currentTask, setCurrentTask} = useContext(TasksContext);
     const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
+    const somefolderName = "";
 
     const handleIsDone = (aTask) => {
         const unfinishedSubtasks = (someSubtask) => someSubtask.subtaskDone === false ;
@@ -54,6 +55,24 @@ export default function TaskCard(){
         
     };
 
+    const moveToFolder = (aTask) => {
+        /*
+        const _folders = [...folders];
+        const toDoFolderIndex = _folders.findIndex((curr) => curr.folderName === 'To Do')
+        const doneFolderIndex = _folders.findIndex((curr) => curr.folderName === 'Done')
+        const currentTaskIndex = _folders[toDoFolderIndex].folderTasks.findIndex((curr) => curr.taskName === aTask.taskName)
+        const doneTasksIndex = _folders[doneFolderIndex].folderTasks.length;
+
+        _folders[doneFolderIndex].folderTasks[doneTasksIndex] = aTask;
+        _folders[doneFolderIndex].folderTasks[doneTasksIndex].isDone = true;
+        _folders[toDoFolderIndex].folderTasks.splice(currentTaskIndex, 1);
+
+        setCurrentTask({taskName: "", 
+            projectName: "", assigneeName: "", 
+            deadline: {}, subtasks: [], isDone: false});
+        */
+    };
+
     useEffect(() => {
         /*
         console.log("subtask (taskcard): ", subtask);
@@ -64,9 +83,9 @@ export default function TaskCard(){
 
     return (
        
-        <Box>
+        <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
             {tasks.map((aTask) => { return(
-                <Card key={aTask.taskName} sx={{display: 'block', maxWidth: 345 }}>
+                <Card key={aTask.taskName} >
                     <CardHeader
                         title={aTask.taskName}
                         subheader={aTask.projectName}
@@ -119,6 +138,37 @@ export default function TaskCard(){
                         <Typography variant="h6" color="text.secondary">
                             Task Deadline: {aTask.deadline? aTask.deadline.toDateString() : ""}
                         </Typography>
+
+                        <Divider />
+                        
+                        <Typography variant="subtitle1" color="text.secondary">
+                            Move Task to Another Folder
+                        </Typography>
+
+                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                            <InputLabel id="folder-input-label">Folder</InputLabel>
+                            <Select
+                                labelId="folder-select-label"
+                                id="folder-select"
+                                value={somefolderName}
+                                label="Folder"
+                                onChange={() => setSelectedFolder({...folder, folderName: somefolderName})}
+                            >
+                                {folders.map((aFolder) => { return(
+                                    <MenuItem key={aFolder.folderName}>
+                                        {aFolder.folderName}
+                                    </MenuItem>
+                                );})}
+
+                            </Select>
+
+                        </FormControl>
+
+                        <Button onClick={() => moveToFolder(aTask)}>
+                            Move
+                        </Button>
+
+                        <Divider />
 
                         {!aTask.isDone? 
                         <Button onClick={() => handleIsDone(aTask)}>

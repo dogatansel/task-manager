@@ -8,7 +8,7 @@ export default function TaskBoard(){
     return (
         <Box
             component="main"
-            sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+            sx={{  display: 'flex', flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
             <TaskCard />
         </Box>
