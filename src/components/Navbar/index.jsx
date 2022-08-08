@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import NewTaskDialogue from '../CreateDialog';
 import { FolderContext } from '../TaskPage';
 
-function Navbar({drawerWidth, /*folder, setSelectedFolder, currentTask, setCurrentTask,*/ tasks, /*setTasks, folders, setFolders */}) {
+function Navbar({drawerWidth, tasks}) {
 
     const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
     const [open, setOpen] = useState(false);
@@ -15,7 +15,7 @@ function Navbar({drawerWidth, /*folder, setSelectedFolder, currentTask, setCurre
     };
     
     useEffect(() => {
-        console.log("Tasks (Navbar): ", tasks);
+        //console.log("Tasks (Navbar): ", tasks);
     }, [tasks])
 
     return(
@@ -49,12 +49,6 @@ function Navbar({drawerWidth, /*folder, setSelectedFolder, currentTask, setCurre
                 <NewTaskDialogue 
                     open={open} 
                     setOpen={setOpen}
-                    /*
-                    folder={folder}
-                    setSelectedFolder={setSelectedFolder}
-                    folders={folders}
-                    setFolders={setFolders}
-                    */
                 />
 
             </Toolbar>

@@ -4,12 +4,9 @@ import { useEffect, useContext } from 'react';
 import { Typography, ListItem, ListItemText, ListItemButton, List, Drawer, Button } from '@mui/material';
 import { FolderContext } from '../TaskPage';
 
-export default function TaskDrawer({open, setOpen, 
-    drawerWidth,/* folders, setFolders, */folderInput, 
-    setFolderInput /*, selectedFolder, setSelectedFolder */}) {
+export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, setFolderInput }) {
 
     const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
-    //console.log("folders (drawer)", folders);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -17,6 +14,7 @@ export default function TaskDrawer({open, setOpen,
 
     useEffect(() => {
         console.log("folders", folders)
+        
     }, [folders])
 
     return (
@@ -60,10 +58,6 @@ export default function TaskDrawer({open, setOpen,
                 setOpen={setOpen}
                 folderInput={folderInput} 
                 setFolderInput={setFolderInput} 
-                /*
-                folders={folders}
-                setFolders={setFolders}
-                */
             />
 
         </Drawer>

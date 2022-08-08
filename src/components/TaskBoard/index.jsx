@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import TaskCard from '../TaskCard';
 
-
 export default function TaskBoard(){
 
     return (

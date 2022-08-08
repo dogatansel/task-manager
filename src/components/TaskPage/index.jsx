@@ -1,9 +1,10 @@
 import React from 'react';
-import Navbar from '../Navbar';
-import TaskBoard from '../TaskBoard';
+import TaskSpace from '../TaskSpace';
 import TaskDrawer from '../TaskDrawer';
 import { useState, createContext } from 'react';
 import { Box, CssBaseline } from '@mui/material';
+import Navbar from '../Navbar';
+import TaskBoard from '../TaskBoard';
 
 const drawerWidth = 240;
 export const TasksContext = createContext();
@@ -29,9 +30,6 @@ export default function TaskPage() {
 
             <FolderContext.Provider value={{folder: selectedFolder, setSelectedFolder, folders, setFolders}}>
             <TasksContext.Provider value={{tasks: selectedFolder.folderTasks, setTasks, currentTask, setCurrentTask}}>
-                <Navbar 
-                    drawerWidth={drawerWidth}
-                />
                 
                 <TaskDrawer
                     open={open} 
@@ -41,7 +39,11 @@ export default function TaskPage() {
                     setFolderInput={setFolderInput} 
                 />
 
-                <TaskBoard/>
+                {/*<Navbar 
+                    drawerWidth={drawerWidth}
+                />
+                <TaskBoard/>*/}
+                <TaskSpace drawerWidth={drawerWidth}/>
 
             </TasksContext.Provider>
             </FolderContext.Provider>
