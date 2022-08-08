@@ -50,13 +50,7 @@ export default function NewTaskDialogue({open, setOpen}) {
     };
 
     useEffect(() => {
-        /*
-        console.log("subtasks", currentTask.subtasks)
-        console.log("(task dialog) current task: ", currentTask);
-        console.log("(task dialog) tasks: ", tasks);
-        console.log("(task dialog) folder: ", folder);
-        console.log(folders);
-        */
+        
     }, [currentTask.subtasks, tasks, folder, folders] )
     
     return (
@@ -124,9 +118,10 @@ export default function NewTaskDialogue({open, setOpen}) {
                         variant="outlined"
                     />
                     <Button 
+                        size="large"
+                        sx={{m: 1, width: `calc(100% - 330px)`}}
                         display="inline-flex" 
                         variant="contained" 
-                        size="medium" 
                         onClick={handleAddSubtask}
                     >
                         Add

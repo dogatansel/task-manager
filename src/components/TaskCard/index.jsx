@@ -90,22 +90,14 @@ export default function TaskCard(){
     };
 
     useEffect(() => {
-        /*
-        console.log("subtask (taskcard): ", subtask);
-        console.log("current task (taskcard): ", currentTask);
-        console.log("tasks (taskcard): ", tasks);
-        
-        console.log("folders (taskcard): ", folders);
-        console.log("current folder (taskcard): ", somefolderName);
-        */
-           
+
     }, [subtask, currentTask, tasks, folder, folders])
 
     return (
        
-        <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
+        <Box component="form" sx={{'& .MuiTextField-root': { display: 'flex', m: 1, width: '25ch' },}}>
             {tasks.map((aTask) => { return(
-                <Card key={aTask.taskName} >
+                <Card sx={{ width: 345 }} key={aTask.taskName} >
                     <CardHeader
                         title={aTask.taskName}
                         subheader={aTask.projectName}
@@ -159,7 +151,7 @@ export default function TaskCard(){
 
                         <Divider />
 
-                        <Typography variant="h6" color="text.secondary">
+                        <Typography sx={{ marginTop: 1, marginBottom: 1}} variant="h6" color="text.secondary">
                             Deadline: {aTask.deadline? aTask.deadline.toDateString() : ""}
                         </Typography>
 
@@ -167,11 +159,11 @@ export default function TaskCard(){
                         
                         {!aTask.isDone?
                         <>
-                        <Typography variant="subtitle1" color="text.secondary">
+                        <Typography sx={{ marginTop: 1, marginBottom: 1}} variant="subtitle1" color="text.secondary">
                             Move Task to Another Folder
                         </Typography>
 
-                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl size="small" sx={{ p: 0, marginRight: 2, marginBottom: 1, minWidth: 180 }}>
                             <InputLabel id="folder-input-label">Folder</InputLabel>
                             <Select
                                 labelId="folder-select-label"
@@ -190,13 +182,25 @@ export default function TaskCard(){
 
                         </FormControl>
                         
-                        <Button onClick={() => moveToFolder(aTask)}>
+                        <Button 
+                            size="medium"
+                            sx={{width: `calc(100% - 200px)`}}
+                            onClick={() => moveToFolder(aTask)}
+                            display="inline-flex" 
+                            variant="contained"
+                        >
                             Move
                         </Button>
 
                         <Divider />
 
-                        <Button onClick={() => handleIsDone(aTask)}>
+                        <Button 
+                            marginTop="15px"
+                            fullWidth
+                            onClick={() => handleIsDone(aTask)} 
+                            display="inline-flex" 
+                            variant="contained"
+                        >
                             Finish Task
                         </Button>
                         </>
