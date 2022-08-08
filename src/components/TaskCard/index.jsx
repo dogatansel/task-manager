@@ -11,7 +11,7 @@ export default function TaskCard(){
     const {tasks, setTasks, currentTask, setCurrentTask} = useContext(TasksContext);
     const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
-    const somefolderName = "";
+    const [somefolderName, setSomeFolderName] = useState("");
 
     const handleIsDone = (aTask) => {
         const unfinishedSubtasks = (someSubtask) => someSubtask.subtaskDone === false ;
@@ -56,21 +56,37 @@ export default function TaskCard(){
     };
 
     const moveToFolder = (aTask) => {
-        /*
-        const _folders = [...folders];
-        const toDoFolderIndex = _folders.findIndex((curr) => curr.folderName === 'To Do')
-        const doneFolderIndex = _folders.findIndex((curr) => curr.folderName === 'Done')
-        const currentTaskIndex = _folders[toDoFolderIndex].folderTasks.findIndex((curr) => curr.taskName === aTask.taskName)
-        const doneTasksIndex = _folders[doneFolderIndex].folderTasks.length;
 
-        _folders[doneFolderIndex].folderTasks[doneTasksIndex] = aTask;
-        _folders[doneFolderIndex].folderTasks[doneTasksIndex].isDone = true;
+        console.log("folder (moveToFolder): ", folder);
+
+        const unfinishedSubtasks = (someSubtask) => someSubtask.subtaskDone === false ;
+        const unfinished = aTask.subtasks.some(unfinishedSubtasks);
+
+        if (unfinished && somefolderName === 'Done') {
+            alert("Your subtasks are not finished");
+            return;
+        } 
+        else if (somefolderName === 'Done') {
+            setCurrentTask({...aTask, isDone: !aTask.isDone});
+        }
+
+        const _folders = [...folders];
+        const toDoFolderIndex = _folders.findIndex((curr) => curr.folderName === 'To Do');
+        const folderIndex = _folders.findIndex((curr) => curr.folderName === somefolderName);
+        const currentTaskIndex = _folders[toDoFolderIndex].folderTasks.findIndex((curr) => curr.taskName === aTask.taskName)
+        const folderTasksIndex = _folders[folderIndex].folderTasks.length;
+
+        _folders[folderIndex].folderTasks[folderTasksIndex] = aTask;
+        somefolderName === 'Done' ? _folders[folderIndex].folderTasks[folderTasksIndex].isDone = true
+                        : _folders[folderIndex].folderTasks[folderTasksIndex].isDone = false;
         _folders[toDoFolderIndex].folderTasks.splice(currentTaskIndex, 1);
 
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
             deadline: {}, subtasks: [], isDone: false});
-        */
+        
+        setSomeFolderName("");
+        
     };
 
     useEffect(() => {
@@ -78,8 +94,12 @@ export default function TaskCard(){
         console.log("subtask (taskcard): ", subtask);
         console.log("current task (taskcard): ", currentTask);
         console.log("tasks (taskcard): ", tasks);
+        
+        console.log("folders (taskcard): ", folders);
+        console.log("current folder (taskcard): ", somefolderName);
         */
-    }, [subtask, currentTask, tasks])
+           
+    }, [subtask, currentTask, tasks, folder, folders])
 
     return (
        
@@ -141,6 +161,8 @@ export default function TaskCard(){
 
                         <Divider />
                         
+                        {!aTask.isDone?
+                        <>
                         <Typography variant="subtitle1" color="text.secondary">
                             Move Task to Another Folder
                         </Typography>
@@ -150,12 +172,12 @@ export default function TaskCard(){
                             <Select
                                 labelId="folder-select-label"
                                 id="folder-select"
-                                value={somefolderName}
+                                value={somefolderName || ""}
                                 label="Folder"
-                                onChange={() => setSelectedFolder({...folder, folderName: somefolderName})}
+                                onChange={(e) => setSomeFolderName(e.target.value)}
                             >
                                 {folders.map((aFolder) => { return(
-                                    <MenuItem key={aFolder.folderName}>
+                                    <MenuItem key={aFolder.folderName} value={aFolder.folderName}>
                                         {aFolder.folderName}
                                     </MenuItem>
                                 );})}
@@ -163,17 +185,17 @@ export default function TaskCard(){
                             </Select>
 
                         </FormControl>
-
+                        
                         <Button onClick={() => moveToFolder(aTask)}>
                             Move
                         </Button>
 
                         <Divider />
 
-                        {!aTask.isDone? 
                         <Button onClick={() => handleIsDone(aTask)}>
                             Finish Task
                         </Button>
+                        </>
                         :
                         <Typography variant="subtitle2" color="text.secondary">
                             Task Finished
