@@ -1,14 +1,17 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext} from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import NewTaskDialogue from '../CreateDialog';
+import { FolderContext } from '../TaskPage';
 
-function Navbar({drawerWidth, folder, setSelectedFolder, currentTask, setCurrentTask, tasks, setTasks, folders, setFolders}) {
+function Navbar({drawerWidth, /*folder, setSelectedFolder, currentTask, setCurrentTask,*/ tasks, /*setTasks, folders, setFolders */}) {
 
+    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
+        console.log("open", true);
     };
     
     useEffect(() => {
@@ -46,10 +49,12 @@ function Navbar({drawerWidth, folder, setSelectedFolder, currentTask, setCurrent
                 <NewTaskDialogue 
                     open={open} 
                     setOpen={setOpen}
+                    /*
                     folder={folder}
                     setSelectedFolder={setSelectedFolder}
                     folders={folders}
                     setFolders={setFolders}
+                    */
                 />
 
             </Toolbar>

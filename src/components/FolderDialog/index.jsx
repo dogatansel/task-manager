@@ -1,8 +1,12 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { useContext} from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from '@mui/material';
+import { FolderContext } from '../TaskPage';
 
-export default function NewFolderDialog({open, setOpen, folderInput, setFolderInput, folders, setFolders}) {
+export default function NewFolderDialog({open, setOpen, folderInput, setFolderInput}) {
+
+    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
 
     const handleClose = () => {
         setOpen(false);

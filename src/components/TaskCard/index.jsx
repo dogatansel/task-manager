@@ -57,8 +57,6 @@ export default function TaskCard(){
 
     const moveToFolder = (aTask) => {
 
-        console.log("folder (moveToFolder): ", folder);
-
         const unfinishedSubtasks = (someSubtask) => someSubtask.subtaskDone === false ;
         const unfinished = aTask.subtasks.some(unfinishedSubtasks);
 
@@ -71,15 +69,17 @@ export default function TaskCard(){
         }
 
         const _folders = [...folders];
-        const toDoFolderIndex = _folders.findIndex((curr) => curr.folderName === 'To Do');
+        
+        const currentFolderIndex = _folders.findIndex((curr) => curr.folderName === folder.folderName);
+        const currentTaskIndex = _folders[currentFolderIndex].folderTasks.findIndex((curr) => curr.taskName === aTask.taskName);
+
         const folderIndex = _folders.findIndex((curr) => curr.folderName === somefolderName);
-        const currentTaskIndex = _folders[toDoFolderIndex].folderTasks.findIndex((curr) => curr.taskName === aTask.taskName)
         const folderTasksIndex = _folders[folderIndex].folderTasks.length;
 
         _folders[folderIndex].folderTasks[folderTasksIndex] = aTask;
         somefolderName === 'Done' ? _folders[folderIndex].folderTasks[folderTasksIndex].isDone = true
                         : _folders[folderIndex].folderTasks[folderTasksIndex].isDone = false;
-        _folders[toDoFolderIndex].folderTasks.splice(currentTaskIndex, 1);
+        _folders[currentFolderIndex].folderTasks.splice(currentTaskIndex, 1);
 
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 

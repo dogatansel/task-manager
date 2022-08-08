@@ -6,12 +6,11 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TasksContext } from '../TaskPage';
+import { FolderContext } from '../TaskPage';
 
-export default function NewTaskDialogue({open, setOpen, folder,
-    setSelectedFolder,
-    folders,
-    setFolders}) {
+export default function NewTaskDialogue({open, setOpen}) {
 
+    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
     const { tasks, setTasks, currentTask, setCurrentTask } = useContext(TasksContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
 
