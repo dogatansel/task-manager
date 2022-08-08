@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import { Typography, Box, Card, CardHeader, CardContent, Button, Divider } from '@mui/material';
-import { ListItem, ListItemText, List  } from '@mui/material';
+import { ListItem, ListItemText, List, ListSubheader } from '@mui/material';
 import { Radio, RadioGroup, FormControl, FormControlLabel, InputLabel, Select, MenuItem } from '@mui/material';
 import { TasksContext } from '../TaskPage';
 import { FolderContext } from '../TaskPage';
@@ -109,18 +109,22 @@ export default function TaskCard(){
                     <CardHeader
                         title={aTask.taskName}
                         subheader={aTask.projectName}
-                    />   
+                    />  
 
                     <Divider />
 
                     <CardContent>
-                        <Typography variant="h5" color="text.secondary">
-                            {aTask.assigneeName}
+                        <Typography variant="h6" color="text.secondary" paddingBottom="10px">
+                            Assignee: {aTask.assigneeName}
                         </Typography>
 
                         <Divider />
 
                         <List>
+                            <Typography variant="h6" color="text.secondary">
+                                Subtasks
+                            </Typography>
+
                             {aTask.subtasks.map((aSubtask, index) => {return (
                                 !aTask.isDone ?
                                 <ListItem key={aSubtask.title} disablePadding>
@@ -156,7 +160,7 @@ export default function TaskCard(){
                         <Divider />
 
                         <Typography variant="h6" color="text.secondary">
-                            Task Deadline: {aTask.deadline? aTask.deadline.toDateString() : ""}
+                            Deadline: {aTask.deadline? aTask.deadline.toDateString() : ""}
                         </Typography>
 
                         <Divider />

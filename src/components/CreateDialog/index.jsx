@@ -103,6 +103,7 @@ export default function NewTaskDialogue({open, setOpen}) {
 
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
+                        inputFormat="dd/MM/yyyy"
                         label="Task Deadline"
                         value={currentTask.deadline}
                         onChange={(newValue) => setCurrentTask({...currentTask, deadline: newValue})}
@@ -110,7 +111,7 @@ export default function NewTaskDialogue({open, setOpen}) {
                     />
                 </LocalizationProvider>
                 
-                <Box > 
+                <Box sx={{  display: 'block', flexGrow: 1}}> 
 
                     <TextField
                         autoFocus
@@ -122,15 +123,28 @@ export default function NewTaskDialogue({open, setOpen}) {
                         type="subtask name"
                         variant="outlined"
                     />
-                    <Button onClick={handleAddSubtask}>Add</Button>
+                    <Button 
+                        display="inline-flex" 
+                        variant="contained" 
+                        size="medium" 
+                        onClick={handleAddSubtask}
+                    >
+                        Add
+                    </Button>
 
-                    <Typography sx={{ display: 'flex' }}>
-                        Subtasks, Status
-                    </Typography>
-                
+                    <Box sx={{ display: 'flex'}}>
+                        <Typography padding="30px" >
+                            Subtask
+                        </Typography>
+
+                        <Typography padding="30px" >
+                            Status
+                        </Typography>
+                    </Box>
+
                     {(currentTask.subtasks) && (currentTask.subtasks).map((subtaskOnDialog, index) => { 
                         return(
-                            <FormControl sx={{ display: 'inlined' }} key={subtaskOnDialog.title}>
+                            <FormControl sx={{ display: 'inline grid' }} key={subtaskOnDialog.title}>
 
                                 <DialogContentText>
                                     {subtaskOnDialog.title}  

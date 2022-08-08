@@ -38,11 +38,6 @@ export default function TaskPage() {
                     folderInput={folderInput} 
                     setFolderInput={setFolderInput} 
                 />
-
-                {/*<Navbar 
-                    drawerWidth={drawerWidth}
-                />
-                <TaskBoard/>*/}
                 <TaskSpace drawerWidth={drawerWidth}/>
 
             </TasksContext.Provider>
