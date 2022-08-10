@@ -37,7 +37,7 @@ export default function TaskCard(){
 
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
-            deadline: {}, subtasks: [], isDone: false});
+            deadline: new Date(), subtasks: [], isDone: false});
     }; 
 
     const handleSubtaskDone = (aTask, aTitle, status, index) => {
@@ -51,7 +51,7 @@ export default function TaskCard(){
 
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
-            deadline: {}, subtasks: [], isDone: false});
+            deadline: new Date(), subtasks: [], isDone: false});
         
     };
 
@@ -83,7 +83,7 @@ export default function TaskCard(){
 
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
-            deadline: {}, subtasks: [], isDone: false});
+            deadline: new Date(), subtasks: [], isDone: false});
         
         setSomeFolderName("");
         
@@ -95,7 +95,7 @@ export default function TaskCard(){
 
     return (
        
-        <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap', m: 1, width: 1150 }}>
+        <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap', m: 1, width: 1150, height: 1 }}>
             {tasks.map((aTask) => { return(
                 <Card sx={{ width: 345, m: 2 }} key={aTask.taskName}>
                     <CardHeader
@@ -195,7 +195,7 @@ export default function TaskCard(){
                         <Divider />
 
                         <Button 
-                            marginTop="15px"
+                            margin-top="15px"
                             fullWidth
                             onClick={() => handleIsDone(aTask)} 
                             display="inline-flex" 

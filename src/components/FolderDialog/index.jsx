@@ -9,13 +9,12 @@ export default function NewFolderDialog({open, setOpen, folderInput, setFolderIn
     const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
 
     const handleClose = () => {
+        setFolderInput("");
         setOpen(false);
     };
     
     const handleFolderAddition = () => {
         setFolders([...folders, {folderName: folderInput, folderTasks: []}]);
-        console.log(folders);
-        setFolderInput("");
         handleClose();
     };
 
@@ -30,6 +29,7 @@ export default function NewFolderDialog({open, setOpen, folderInput, setFolderIn
                 </DialogContentText>
                 <TextField
                     autoFocus
+                    inputProps={{ style: { WebkitBoxShadow: "0 0 0 1000px #212121 inset" } }}
                     margin="dense"
                     id="name"
                     value={folderInput}
@@ -37,7 +37,7 @@ export default function NewFolderDialog({open, setOpen, folderInput, setFolderIn
                     label="Folder Name"
                     type="folder name"
                     fullWidth
-                    variant="standard"
+                    variant="outlined"
                 />
             </DialogContent>
 

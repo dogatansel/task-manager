@@ -19,7 +19,7 @@ export default function NewTaskDialogue({open, setOpen}) {
         setOpen(false);
         setCurrentTask({taskName: "", 
             projectName: "", assigneeName: "", 
-            deadline: {}, subtasks: [], isDone: false});
+            deadline: new Date(), subtasks: [], isDone: false});
     };
 
     const handleCreateTask = () => {
@@ -65,6 +65,7 @@ export default function NewTaskDialogue({open, setOpen}) {
 
                 <TextField
                     autoFocus
+                    inputProps={{ style: { WebkitBoxShadow: "0 0 0 1000px #212121 inset" } }}
                     required
                     margin="dense"
                     id="task-name"
@@ -76,6 +77,7 @@ export default function NewTaskDialogue({open, setOpen}) {
                 />
                 <TextField
                     autoFocus
+                    inputProps={{ style: { WebkitBoxShadow: "0 0 0 1000px #212121 inset" } }}
                     margin="dense"
                     id="project-name"
                     value={currentTask.projectName || ""}
@@ -86,6 +88,7 @@ export default function NewTaskDialogue({open, setOpen}) {
                 />
                 <TextField
                     autoFocus
+                    inputProps={{ style: { WebkitBoxShadow: "0 0 0 1000px #212121 inset" } }}
                     required
                     margin="dense"
                     id="assignee-name"
@@ -99,6 +102,7 @@ export default function NewTaskDialogue({open, setOpen}) {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
                         inputFormat="dd/MM/yyyy"
+                        inputProps={{ style: { WebkitBoxShadow: "0 0 0 1000px #212121 inset" } }}
                         label="Task Deadline"
                         value={currentTask.deadline}
                         onChange={(newValue) => setCurrentTask({...currentTask, deadline: newValue})}
@@ -110,6 +114,7 @@ export default function NewTaskDialogue({open, setOpen}) {
 
                     <TextField
                         autoFocus
+                        inputProps={{ style: { WebkitBoxShadow: "0 0 0 1000px #212121 inset" } }}
                         margin="dense"
                         id="subtask-name"
                         value={subtask.title || ""}

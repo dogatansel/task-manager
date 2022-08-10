@@ -1,7 +1,7 @@
 import React from 'react';
 import NewFolderDialog from '../FolderDialog';
 import { useEffect, useContext } from 'react';
-import { Typography, ListItem, ListItemText, ListItemButton, List, Drawer, Button } from '@mui/material';
+import { Typography, ListItem, ListItemText, ListItemButton, List, Drawer, Button, Divider } from '@mui/material';
 import { FolderContext } from '../TaskPage';
 
 export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, setFolderInput }) {
@@ -24,8 +24,8 @@ export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, set
                 width: drawerWidth,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
-                width: drawerWidth,
-                boxSizing: 'border-box',
+                    width: drawerWidth,
+                    boxSizing: 'border-box',
                 },
             }}
             variant="permanent"
@@ -34,6 +34,8 @@ export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, set
             <Typography variant="h4" noWrap component="div" padding="10px" align="left">
                 Task Folders
             </Typography>
+            
+            <Divider/>
             
             <List>
                 {folders.map(({folderName, folderTasks}) => (

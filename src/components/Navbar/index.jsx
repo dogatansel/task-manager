@@ -19,10 +19,10 @@ function Navbar({drawerWidth, tasks}) {
     }, [tasks])
 
     return(
-        <AppBar 
+        <AppBar
             position="fixed"
             sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-            color="default"
+            
         >
             <Toolbar>
                 
