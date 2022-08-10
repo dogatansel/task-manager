@@ -2,6 +2,8 @@ import React from 'react';
 import NewFolderDialog from '../FolderDialog';
 import { useEffect, useContext } from 'react';
 import { Typography, ListItem, ListItemText, ListItemButton, List, Drawer, Button, Divider } from '@mui/material';
+import FolderIcon from '@mui/icons-material/Folder';
+import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined';
 import { FolderContext } from '../TaskPage';
 
 export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, setFolderInput }) {
@@ -39,11 +41,15 @@ export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, set
             
             <List>
                 {folders.map(({folderName, folderTasks}) => (
-                <ListItem key={folderName} disablePadding>
+                <ListItem key={folderName} sx={{pl: 0, pr: 1, py: 0, '& .Mui-focused': { background: '#52525b'} }}>
                     <ListItemButton align="justify" onClick={() => setSelectedFolder({folderName, folderTasks})}>
                         <ListItemText primary={folderName}/>
                     </ListItemButton>
-                    <Button disabled>Delete</Button>
+                    {folderName !== folder.folderName ?
+                        <FolderIcon/>
+                    : 
+                        <FolderOpenOutlinedIcon/>
+                    }
                 </ListItem>
                 ))}
             </List>

@@ -23,6 +23,16 @@ export default function NewTaskDialogue({open, setOpen}) {
     };
 
     const handleCreateTask = () => {
+
+        if (currentTask.taskName === '') {
+            alert("You cannot create a task without giving it a name!")
+            return;
+
+        } else if (currentTask.assigneeName === '') {
+            alert("You cannot create a task without assigning a person to the task!")
+            return;
+        }
+            
         setTasks([...tasks, currentTask]);
     
         setSelectedFolder({...folder, folderTasks:[...folder.folderTasks, currentTask]});
@@ -46,6 +56,11 @@ export default function NewTaskDialogue({open, setOpen}) {
     };
 
     const handleAddSubtask = () => {
+
+        if (subtask.title === ''){
+            alert("You cannot add an empty subtask!")
+            return;
+        }
         setCurrentTask({...currentTask, subtasks: [...currentTask.subtasks, subtask]});
         setSubtask({title: "", subtaskDone: false});
     };
@@ -58,7 +73,7 @@ export default function NewTaskDialogue({open, setOpen}) {
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Create New Task</DialogTitle>
 
-            <DialogContent component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}>
+            <DialogContent component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch', p: 0},}}>
                 <DialogContentText>
                     To create a new task, please fill in the information below and click create.
                 </DialogContentText>
@@ -133,14 +148,14 @@ export default function NewTaskDialogue({open, setOpen}) {
                         Add
                     </Button>
 
-                    <List sx={{paddingLeft: 1}}>
-                        <Typography variant="h6" color="text.secondary">
+                    <List >
+                        <Typography variant="subtitle1" color="text.secondary">
                             Subtasks
                         </Typography>
                     
                         {(currentTask.subtasks) && (currentTask.subtasks).map((subtaskOnDialog, index) => { 
                             return(
-                                <ListItem key={subtaskOnDialog.title} disablePadding >
+                                <ListItem key={subtaskOnDialog.title} disablePadding sx={{paddingLeft: 1}}>
 
                                     <ListItemText sx={{maxWidth: 250}}>
                                         {subtaskOnDialog.title} 

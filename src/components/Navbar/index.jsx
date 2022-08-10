@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState, useContext} from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import NewTaskDialogue from '../CreateDialog';
+import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined';
 import { FolderContext } from '../TaskPage';
 
 function Navbar({drawerWidth, tasks}) {
@@ -22,12 +23,11 @@ function Navbar({drawerWidth, tasks}) {
         <AppBar
             position="fixed"
             sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-            
         >
             <Toolbar>
                 
-                <Typography variant="h5" noWrap component="div" paddingRight="20px">
-                    {folder.folderName}
+                <Typography variant="h5" noWrap component="div" sx={{mr: 2, display: 'flex'}} >
+                    {folder.folderName ? <FolderOpenOutlinedIcon sx={{mr: 1}}/> : <></>} {folder.folderName}
                 </Typography>
                 
                 {folder.folderName === 'To Do'? 

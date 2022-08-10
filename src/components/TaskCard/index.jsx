@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Typography, Box, Card, CardHeader, CardContent, Button, Divider } from '@mui/material';
 import { ListItem, ListItemText, List} from '@mui/material';
 import { Radio, RadioGroup, FormControl, FormControlLabel, InputLabel, Select, MenuItem } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { TasksContext } from '../TaskPage';
 import { FolderContext } from '../TaskPage';
 
@@ -67,6 +68,10 @@ export default function TaskCard(){
         else if (somefolderName === 'Done') {
             setCurrentTask({...aTask, isDone: !aTask.isDone});
         }
+        else if (somefolderName === '') {
+            alert("You must choose the folder where you will move this task first!");
+            return;
+        }
 
         const _folders = [...folders];
         
@@ -107,7 +112,7 @@ export default function TaskCard(){
 
                     <CardContent>
                         <Typography variant="h6" color="text.secondary" paddingBottom="10px">
-                            Assignee: {aTask.assigneeName}
+                            Assignee: <AccountCircleIcon sx={{paddingTop: 1}}/> {aTask.assigneeName}
                         </Typography>
 
                         <Divider />

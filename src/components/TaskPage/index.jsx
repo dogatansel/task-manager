@@ -14,7 +14,7 @@ const theme = createTheme({
 
         primary: { //buttons
             main: '#f59e0b', //amber 500
-            contrastText: '#ffffff'
+            contrastText: '#ffffff',
         },
         background: {
             default: '#d4d4d8',
@@ -45,8 +45,6 @@ export default function TaskPage() {
                                             deadline: new Date(), subtasks: [], isDone: false});
     const [tasks, setTasks] = useState([]);
 
-    
-
     return (
         
         <Box sx={{ display: 'flex', width: 1, height: 1 }}>
@@ -67,7 +65,7 @@ export default function TaskPage() {
                         <TaskSpace drawerWidth={drawerWidth}/>
 
                     </TasksContext.Provider>
-            </FolderContext.Provider>
+                </FolderContext.Provider>
 
             </ThemeProvider>
             
