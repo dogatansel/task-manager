@@ -5,14 +5,13 @@ import NewTaskDialogue from '../CreateDialog';
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined';
 import { FolderContext } from '../TaskPage';
 
-function Navbar({drawerWidth, tasks}) {
+export default function Navbar({drawerWidth, tasks}) {
 
     const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
-        console.log("open", true);
     };
     
     useEffect(() => {
@@ -55,5 +54,3 @@ function Navbar({drawerWidth, tasks}) {
         </AppBar>
     );
 }
-
-export default Navbar;

@@ -125,7 +125,7 @@ export default function NewTaskDialogue({open, setOpen}) {
                     />
                 </LocalizationProvider>
                 
-                <Box sx={{  display: 'block', flexGrow: 1}}> 
+                <Box sx={{ display: 'block', flexGrow: 1}}> 
 
                     <TextField
                         autoFocus

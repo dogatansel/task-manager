@@ -91,7 +91,6 @@ export default function TaskCard(){
             deadline: new Date(), subtasks: [], isDone: false});
         
         setSomeFolderName("");
-        
     };
 
     useEffect(() => {
@@ -101,8 +100,10 @@ export default function TaskCard(){
     return (
        
         <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap', m: 1, width: 1150, height: 1 }}>
-            {tasks.map((aTask) => { return(
+            {tasks.map((aTask) => { return (
+
                 <Card sx={{ width: 345, m: 2 }} key={aTask.taskName}>
+
                     <CardHeader
                         title={aTask.taskName}
                         subheader={aTask.projectName}
@@ -157,57 +158,57 @@ export default function TaskCard(){
                         <Divider />
 
                         <Typography sx={{ marginTop: 1, marginBottom: 1}} variant="h6" color="text.secondary">
-                            Deadline: {aTask.deadline? aTask.deadline.toDateString() : ""}
+                            Deadline: {aTask.deadline.toDateString()}
                         </Typography>
 
                         <Divider />
                         
                         {!aTask.isDone?
                         <>
-                        <Typography sx={{ marginTop: 1, marginBottom: 1}} variant="subtitle1" color="text.secondary">
-                            Move Task to Another Folder
-                        </Typography>
+                            <Typography sx={{ marginTop: 1, marginBottom: 1}} variant="subtitle1" color="text.secondary">
+                                Move Task to Another Folder
+                            </Typography>
 
-                        <FormControl size="small" sx={{ p: 0, marginRight: 2, marginBottom: 1, width: 180 }}>
-                            <InputLabel id="folder-input-label">Folder</InputLabel>
-                            <Select
-                                labelId="folder-select-label"
-                                id="folder-select"
-                                value={somefolderName || ""}
-                                label="Folder"
-                                onChange={(e) => setSomeFolderName(e.target.value)}
+                            <FormControl size="small" sx={{ p: 0, marginRight: 2, marginBottom: 1, width: 180 }}>
+                                <InputLabel id="folder-input-label">Folder</InputLabel>
+                                <Select
+                                    labelId="folder-select-label"
+                                    id="folder-select"
+                                    value={somefolderName || ""}
+                                    label="Folder"
+                                    onChange={(e) => setSomeFolderName(e.target.value)}
+                                >
+                                    {folders.map((aFolder) => { return(
+                                        <MenuItem key={aFolder.folderName} value={aFolder.folderName}>
+                                            {aFolder.folderName}
+                                        </MenuItem>
+                                    );})}
+
+                                </Select>
+
+                            </FormControl>
+                            
+                            <Button 
+                                size="medium"
+                                sx={{width: `calc(100% - 200px)`}}
+                                onClick={() => moveToFolder(aTask)}
+                                display="inline-flex" 
+                                variant="contained"
                             >
-                                {folders.map((aFolder) => { return(
-                                    <MenuItem key={aFolder.folderName} value={aFolder.folderName}>
-                                        {aFolder.folderName}
-                                    </MenuItem>
-                                );})}
+                                Move
+                            </Button>
 
-                            </Select>
+                            <Divider />
 
-                        </FormControl>
-                        
-                        <Button 
-                            size="medium"
-                            sx={{width: `calc(100% - 200px)`}}
-                            onClick={() => moveToFolder(aTask)}
-                            display="inline-flex" 
-                            variant="contained"
-                        >
-                            Move
-                        </Button>
-
-                        <Divider />
-
-                        <Button 
-                            margin-top="15px"
-                            fullWidth
-                            onClick={() => handleIsDone(aTask)} 
-                            display="inline-flex" 
-                            variant="contained"
-                        >
-                            Finish Task
-                        </Button>
+                            <Button 
+                                margin-top="15px"
+                                fullWidth
+                                onClick={() => handleIsDone(aTask)} 
+                                display="inline-flex" 
+                                variant="contained"
+                            >
+                                Finish Task
+                            </Button>
                         </>
                         :
                         <Typography variant="subtitle2" color="text.secondary">

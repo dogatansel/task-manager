@@ -10,12 +10,14 @@ export const TasksContext = createContext();
 export const FolderContext = createContext();
 const theme = createTheme({
     palette: {
+
         mode: 'dark',
 
         primary: { //buttons
             main: '#f59e0b', //amber 500
             contrastText: '#ffffff',
         },
+
         background: {
             default: '#d4d4d8',
             paper: '#27272a',
@@ -27,7 +29,9 @@ const theme = createTheme({
             dark: '#ef6c00',
             contrastText: 'rgba(0, 0, 0, 0.87)',
         },
+
         contrastThreshold: 3,
+        
         tonalOffset: 0.2,
     },
 });

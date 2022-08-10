@@ -15,8 +15,7 @@ export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, set
     };
 
     useEffect(() => {
-        console.log("folders", folders)
-        
+        //console.log("folders", folders)
     }, [folders])
 
     return (
@@ -40,17 +39,19 @@ export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, set
             <Divider/>
             
             <List>
-                {folders.map(({folderName, folderTasks}) => (
-                <ListItem key={folderName} sx={{pl: 0, pr: 1, py: 0, '& .Mui-focused': { background: '#52525b'} }}>
-                    <ListItemButton align="justify" onClick={() => setSelectedFolder({folderName, folderTasks})}>
-                        <ListItemText primary={folderName}/>
-                    </ListItemButton>
-                    {folderName !== folder.folderName ?
+                {folders.map(({folderName, folderTasks}) => (   
+                    <ListItem key={folderName} sx={{pl: 0, pr: 1, py: 0, '& .Mui-focused': { background: '#52525b'} }}>
+                        
+                        <ListItemButton align="justify" onClick={() => setSelectedFolder({folderName, folderTasks})}>
+                            <ListItemText primary={folderName}/>
+                        </ListItemButton>
+
+                        {folderName !== folder.folderName ?
                         <FolderIcon/>
-                    : 
+                        : 
                         <FolderOpenOutlinedIcon/>
-                    }
-                </ListItem>
+                        }
+                    </ListItem>
                 ))}
             </List>
 
