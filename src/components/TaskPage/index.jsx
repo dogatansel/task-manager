@@ -25,7 +25,7 @@ export default function TaskPage() {
 
     return (
         
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', width: 1, height: 1 }}>
             <CssBaseline />
 
             <FolderContext.Provider value={{folder: selectedFolder, setSelectedFolder, folders, setFolders}}>

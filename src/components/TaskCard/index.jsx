@@ -95,9 +95,9 @@ export default function TaskCard(){
 
     return (
        
-        <Box component="form" sx={{'& .MuiTextField-root': { display: 'flex', m: 1, width: '25ch' },}}>
+        <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap', m: 1, width: 1150 }}>
             {tasks.map((aTask) => { return(
-                <Card sx={{ width: 345 }} key={aTask.taskName} >
+                <Card sx={{ width: 345, m: 2 }} key={aTask.taskName}>
                     <CardHeader
                         title={aTask.taskName}
                         subheader={aTask.projectName}
@@ -112,7 +112,7 @@ export default function TaskCard(){
 
                         <Divider />
 
-                        <List>
+                        <List sx={{height: 200, overflow: 'auto'}}>
                             <Typography variant="h6" color="text.secondary">
                                 Subtasks
                             </Typography>
