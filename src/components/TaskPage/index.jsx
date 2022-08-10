@@ -64,7 +64,8 @@ export default function TaskPage() {
                             setOpen={setOpen}
                             drawerWidth={drawerWidth}
                             folderInput={folderInput} 
-                            setFolderInput={setFolderInput} 
+                            setFolderInput={setFolderInput}
+                            tasks={tasks}
                         />
                         <TaskSpace drawerWidth={drawerWidth}/>
 

@@ -7,7 +7,7 @@ import { FolderContext } from '../TaskPage';
 
 export default function Navbar({drawerWidth, tasks}) {
 
-    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
+    const {folder} = useContext(FolderContext);
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {

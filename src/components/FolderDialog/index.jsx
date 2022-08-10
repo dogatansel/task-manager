@@ -6,7 +6,7 @@ import { FolderContext } from '../TaskPage';
 
 export default function NewFolderDialog({open, setOpen, folderInput, setFolderInput}) {
 
-    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
+    const { folders, setFolders} = useContext(FolderContext);
 
     const handleClose = () => {
         setFolderInput("");
@@ -27,7 +27,7 @@ export default function NewFolderDialog({open, setOpen, folderInput, setFolderIn
                 <DialogContentText>
                     To create a new task folder, please enter the folder name and click create.
                 </DialogContentText>
-                
+
                 <TextField
                     autoFocus
                     inputProps={{ style: { WebkitBoxShadow: "0 0 0 1000px #212121 inset" } }}

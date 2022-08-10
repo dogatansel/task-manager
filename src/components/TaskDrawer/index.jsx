@@ -8,7 +8,7 @@ import { FolderContext } from '../TaskPage';
 
 export default function TaskDrawer({open, setOpen, drawerWidth, folderInput, setFolderInput }) {
 
-    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
+    const {folder, setSelectedFolder, folders} = useContext(FolderContext);
 
     const handleClickOpen = () => {
         setOpen(true);

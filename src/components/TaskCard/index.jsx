@@ -10,7 +10,7 @@ import { FolderContext } from '../TaskPage';
 export default function TaskCard(){
 
     const {tasks, setTasks, currentTask, setCurrentTask} = useContext(TasksContext);
-    const {folder, setSelectedFolder, folders, setFolders} = useContext(FolderContext);
+    const {folder, folders} = useContext(FolderContext);
     const [subtask, setSubtask] = useState({title: "", subtaskDone: false});
     const [somefolderName, setSomeFolderName] = useState("");
 
