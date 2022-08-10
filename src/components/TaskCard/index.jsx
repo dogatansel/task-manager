@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import { Typography, Box, Card, CardHeader, CardContent, Button, Divider } from '@mui/material';
-import { ListItem, ListItemText, List, ListSubheader } from '@mui/material';
+import { ListItem, ListItemText, List} from '@mui/material';
 import { Radio, RadioGroup, FormControl, FormControlLabel, InputLabel, Select, MenuItem } from '@mui/material';
 import { TasksContext } from '../TaskPage';
 import { FolderContext } from '../TaskPage';
@@ -125,15 +125,15 @@ export default function TaskCard(){
                                         {aSubtask.title} 
                                     </ListItemText>
  
-                                    <RadioGroup row>
-
-                                        <FormControlLabel value="done" control={
-                                            <Radio checked={aSubtask.subtaskDone} onClick={() => handleSubtaskDone(aTask, aSubtask.title, true, index)}/>
-                                        } label="Done" />
+                                    <RadioGroup row sx={{minWidth: 210, paddingRight: 1}}>
 
                                         <FormControlLabel value="not done" control={
                                             <Radio checked={!aSubtask.subtaskDone} onClick={() => handleSubtaskDone(aTask, aSubtask.title, false, index)}/>
                                         } label="Not Done" />
+
+                                        <FormControlLabel value="done" control={
+                                            <Radio checked={aSubtask.subtaskDone} onClick={() => handleSubtaskDone(aTask, aSubtask.title, true, index)}/>
+                                        } label="Done" />
 
                                     </RadioGroup>
 
@@ -163,7 +163,7 @@ export default function TaskCard(){
                             Move Task to Another Folder
                         </Typography>
 
-                        <FormControl size="small" sx={{ p: 0, marginRight: 2, marginBottom: 1, minWidth: 180 }}>
+                        <FormControl size="small" sx={{ p: 0, marginRight: 2, marginBottom: 1, width: 180 }}>
                             <InputLabel id="folder-input-label">Folder</InputLabel>
                             <Select
                                 labelId="folder-select-label"

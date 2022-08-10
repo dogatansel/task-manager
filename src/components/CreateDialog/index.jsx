@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Button, Typography } from '@mui/material';
 import { Box, Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material';
+import { ListItem, ListItemText, List} from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -50,7 +51,7 @@ export default function NewTaskDialogue({open, setOpen}) {
     };
 
     useEffect(() => {
-        
+
     }, [currentTask.subtasks, tasks, folder, folders] )
     
     return (
@@ -127,38 +128,33 @@ export default function NewTaskDialogue({open, setOpen}) {
                         Add
                     </Button>
 
-                    <Box sx={{ display: 'flex'}}>
-                        <Typography padding="30px" >
-                            Subtask
+                    <List sx={{paddingLeft: 1}}>
+                        <Typography variant="h6" color="text.secondary">
+                            Subtasks
                         </Typography>
+                    
+                        {(currentTask.subtasks) && (currentTask.subtasks).map((subtaskOnDialog, index) => { 
+                            return(
+                                <ListItem key={subtaskOnDialog.title} disablePadding >
 
-                        <Typography padding="30px" >
-                            Status
-                        </Typography>
-                    </Box>
+                                    <ListItemText sx={{maxWidth: 250}}>
+                                        {subtaskOnDialog.title} 
+                                    </ListItemText>
 
-                    {(currentTask.subtasks) && (currentTask.subtasks).map((subtaskOnDialog, index) => { 
-                        return(
-                            <FormControl sx={{ display: 'inline grid' }} key={subtaskOnDialog.title}>
+                                    <RadioGroup row sx={{minWidth: 100, paddingRight: 1}}>
+                                        <FormControlLabel value="not done" control={
+                                                <Radio onClick={() => handleSubtaskStatus(subtaskOnDialog, false, index)}/>
+                                        } label="Not Done" />
 
-                                <DialogContentText>
-                                    {subtaskOnDialog.title}  
-                                </DialogContentText>
+                                        <FormControlLabel value="done" control={
+                                                <Radio onClick={() => handleSubtaskStatus(subtaskOnDialog, true, index)}/>
+                                        } label="Done" />
+                                    </RadioGroup>
 
-                                <RadioGroup row>
-                                    <FormControlLabel value="done" control={
-                                        <Radio onClick={() => handleSubtaskStatus(subtaskOnDialog, true, index)}/>
-                                    } label="Done" />
-
-                                    <FormControlLabel value="not done" control={
-                                        <Radio onClick={() => handleSubtaskStatus(subtaskOnDialog, false, index)}/>
-                                    } label="Not Done" />
-                                </RadioGroup>
-
-                            </FormControl>
-                        
-                        );                       
-                    })}
+                                </ListItem>
+                            );                       
+                        })}
+                    </List>
                 </Box>
 
             </DialogContent>
